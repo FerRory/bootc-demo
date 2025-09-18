@@ -1,0 +1,24 @@
+FROM quay.io/centos-bootc/centos-bootc:stream9
+
+LABEL org.opencontainers.image.source="https://github.com/ferrory/bootc-demo"
+LABEL org.opencontainers.image.description="Bootc Demo Base Container"
+LABEL org.opencontainers.image.license="MIT"
+
+#include unit files and containers
+ADD etc etc
+
+ADD webpage/index.html etc/demo/
+
+#add additional software
+RUN dnf install -y httpd firewalld && dnf clean all
+
+#enable desired units
+RUN systemctl enable httpd 
+RUN firewall-offline-cmd -s http
+
+RUN ln -s /etc/demo /var/www/html
+
+RUN ln -s /usr/share/zoneinfo/Europe/Amsterdam /etc/localtime
+
+RUN bootc container lint
+

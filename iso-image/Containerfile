@@ -1,0 +1,3 @@
+FROM ghcr.io/ferrory/bootc-demo-base:stream9
+
+ADD etc etc

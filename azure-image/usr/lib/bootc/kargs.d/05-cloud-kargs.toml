@@ -1,0 +1,1 @@
+kargs = ["rootdelay=300", "console=tty0", "console=ttyS0,115200n8", "earlyprintk=ttyS0", "net.iframes=0"]
